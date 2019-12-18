@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.Dao.ContractItemMapper">
+  <resultMap id="BaseResultMap" type="com.test.entity.ContractItem">
+    <id column="contractId" jdbcType="VARCHAR" property="contractid" />
+    <id column="contractItemId" jdbcType="VARCHAR" property="contractitemid" />
+    <result column="goodsId" jdbcType="VARCHAR" property="goodsid" />
+    <result column="goodsName" jdbcType="VARCHAR" property="goodsname" />
+    <result column="clientId" jdbcType="VARCHAR" property="clientid" />
+    <result column="goodsNum" jdbcType="INTEGER" property="goodsnum" />
+    <result column="goodsOutPrice" jdbcType="DOUBLE" property="goodsoutprice" />
+    <result column="itemStatus" jdbcType="VARCHAR" property="itemstatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contractId, contractItemId, goodsId, goodsName, clientId, goodsNum, goodsOutPrice, 
+    itemStatus
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.test.entity.ContractItemKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contractitem
+    where contractId = #{contractid,jdbcType=VARCHAR}
+      and contractItemId = #{contractitemid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.test.entity.ContractItemKey">
+    delete from contractitem
+    where contractId = #{contractid,jdbcType=VARCHAR}
+      and contractItemId = #{contractitemid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.test.entity.ContractItem">
+    insert into contractitem (contractId, contractItemId, goodsId, 
+      goodsName, clientId, goodsNum, 
+      goodsOutPrice, itemStatus)
+    values (#{contractid,jdbcType=VARCHAR}, #{contractitemid,jdbcType=VARCHAR}, #{goodsid,jdbcType=VARCHAR}, 
+      #{goodsname,jdbcType=VARCHAR}, #{clientid,jdbcType=VARCHAR}, #{goodsnum,jdbcType=INTEGER}, 
+      #{goodsoutprice,jdbcType=DOUBLE}, #{itemstatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.entity.ContractItem">
+    insert into contractitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        contractId,
+      </if>
+      <if test="contractitemid != null">
+        contractItemId,
+      </if>
+      <if test="goodsid != null">
+        goodsId,
+      </if>
+      <if test="goodsname != null">
+        goodsName,
+      </if>
+      <if test="clientid != null">
+        clientId,
+      </if>
+      <if test="goodsnum != null">
+        goodsNum,
+      </if>
+      <if test="goodsoutprice != null">
+        goodsOutPrice,
+      </if>
+      <if test="itemstatus != null">
+        itemStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        #{contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractitemid != null">
+        #{contractitemid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsnum != null">
+        #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsoutprice != null">
+        #{goodsoutprice,jdbcType=DOUBLE},
+      </if>
+      <if test="itemstatus != null">
+        #{itemstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.entity.ContractItem">
+    update contractitem
+    <set>
+      <if test="goodsid != null">
+        goodsId = #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        goodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        clientId = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsnum != null">
+        goodsNum = #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsoutprice != null">
+        goodsOutPrice = #{goodsoutprice,jdbcType=DOUBLE},
+      </if>
+      <if test="itemstatus != null">
+        itemStatus = #{itemstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where contractId = #{contractid,jdbcType=VARCHAR}
+      and contractItemId = #{contractitemid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.entity.ContractItem">
+    update contractitem
+    set goodsId = #{goodsid,jdbcType=VARCHAR},
+      goodsName = #{goodsname,jdbcType=VARCHAR},
+      clientId = #{clientid,jdbcType=VARCHAR},
+      goodsNum = #{goodsnum,jdbcType=INTEGER},
+      goodsOutPrice = #{goodsoutprice,jdbcType=DOUBLE},
+      itemStatus = #{itemstatus,jdbcType=VARCHAR}
+    where contractId = #{contractid,jdbcType=VARCHAR}
+      and contractItemId = #{contractitemid,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.test.entity.ContractItem">
+    <id column="contractId" jdbcType="VARCHAR" property="contractid" />
+    <id column="contractItemId" jdbcType="VARCHAR" property="contractitemid" />
+    <result column="goodsId" jdbcType="VARCHAR" property="goodsid" />
+    <result column="goodsName" jdbcType="VARCHAR" property="goodsname" />
+    <result column="clientId" jdbcType="VARCHAR" property="clientid" />
+    <result column="goodsNum" jdbcType="INTEGER" property="goodsnum" />
+    <result column="goodsOutPrice" jdbcType="DOUBLE" property="goodsoutprice" />
+    <result column="itemStatus" jdbcType="VARCHAR" property="itemstatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    contractId, contractItemId, goodsId, goodsName, clientId, goodsNum, goodsOutPrice, 
+    itemStatus
+  </sql>
+  <select id="selectByExample" parameterType="com.test.entity.ContractItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from contractitem
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.test.entity.ContractItemKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contractitem
+    where contractId = #{contractid,jdbcType=VARCHAR}
+      and contractItemId = #{contractitemid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.test.entity.ContractItemKey">
+    delete from contractitem
+    where contractId = #{contractid,jdbcType=VARCHAR}
+      and contractItemId = #{contractitemid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.test.entity.ContractItemExample">
+    delete from contractitem
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.test.entity.ContractItem">
+    insert into contractitem (contractId, contractItemId, goodsId, 
+      goodsName, clientId, goodsNum, 
+      goodsOutPrice, itemStatus)
+    values (#{contractid,jdbcType=VARCHAR}, #{contractitemid,jdbcType=VARCHAR}, #{goodsid,jdbcType=VARCHAR}, 
+      #{goodsname,jdbcType=VARCHAR}, #{clientid,jdbcType=VARCHAR}, #{goodsnum,jdbcType=INTEGER}, 
+      #{goodsoutprice,jdbcType=DOUBLE}, #{itemstatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.entity.ContractItem">
+    insert into contractitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        contractId,
+      </if>
+      <if test="contractitemid != null">
+        contractItemId,
+      </if>
+      <if test="goodsid != null">
+        goodsId,
+      </if>
+      <if test="goodsname != null">
+        goodsName,
+      </if>
+      <if test="clientid != null">
+        clientId,
+      </if>
+      <if test="goodsnum != null">
+        goodsNum,
+      </if>
+      <if test="goodsoutprice != null">
+        goodsOutPrice,
+      </if>
+      <if test="itemstatus != null">
+        itemStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        #{contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractitemid != null">
+        #{contractitemid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsnum != null">
+        #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsoutprice != null">
+        #{goodsoutprice,jdbcType=DOUBLE},
+      </if>
+      <if test="itemstatus != null">
+        #{itemstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.test.entity.ContractItemExample" resultType="java.lang.Long">
+    select count(*) from contractitem
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update contractitem
+    <set>
+      <if test="record.contractid != null">
+        contractId = #{record.contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractitemid != null">
+        contractItemId = #{record.contractitemid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsid != null">
+        goodsId = #{record.goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsname != null">
+        goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientid != null">
+        clientId = #{record.clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsnum != null">
+        goodsNum = #{record.goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsoutprice != null">
+        goodsOutPrice = #{record.goodsoutprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.itemstatus != null">
+        itemStatus = #{record.itemstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update contractitem
+    set contractId = #{record.contractid,jdbcType=VARCHAR},
+      contractItemId = #{record.contractitemid,jdbcType=VARCHAR},
+      goodsId = #{record.goodsid,jdbcType=VARCHAR},
+      goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      clientId = #{record.clientid,jdbcType=VARCHAR},
+      goodsNum = #{record.goodsnum,jdbcType=INTEGER},
+      goodsOutPrice = #{record.goodsoutprice,jdbcType=DOUBLE},
+      itemStatus = #{record.itemstatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.entity.ContractItem">
+    update contractitem
+    <set>
+      <if test="goodsid != null">
+        goodsId = #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        goodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        clientId = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsnum != null">
+        goodsNum = #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsoutprice != null">
+        goodsOutPrice = #{goodsoutprice,jdbcType=DOUBLE},
+      </if>
+      <if test="itemstatus != null">
+        itemStatus = #{itemstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where contractId = #{contractid,jdbcType=VARCHAR}
+      and contractItemId = #{contractitemid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.entity.ContractItem">
+    update contractitem
+    set goodsId = #{goodsid,jdbcType=VARCHAR},
+      goodsName = #{goodsname,jdbcType=VARCHAR},
+      clientId = #{clientid,jdbcType=VARCHAR},
+      goodsNum = #{goodsnum,jdbcType=INTEGER},
+      goodsOutPrice = #{goodsoutprice,jdbcType=DOUBLE},
+      itemStatus = #{itemstatus,jdbcType=VARCHAR}
+    where contractId = #{contractid,jdbcType=VARCHAR}
+      and contractItemId = #{contractitemid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.Dao.PurchaseListMapper">
+  <resultMap id="BaseResultMap" type="com.test.entity.PurchaseList">
+    <id column="purchaseId" jdbcType="VARCHAR" property="purchaseid" />
+    <result column="storeMangerId" jdbcType="VARCHAR" property="storemangerid" />
+    <result column="constractId" jdbcType="VARCHAR" property="constractid" />
+    <result column="contractItemId" jdbcType="VARCHAR" property="contractitemid" />
+    <result column="inTime" jdbcType="DATE" property="intime" />
+    <result column="goodsInPrice" jdbcType="DOUBLE" property="goodsinprice" />
+    <result column="allCost" jdbcType="DOUBLE" property="allcost" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    purchaseId, storeMangerId, constractId, contractItemId, inTime, goodsInPrice, allCost
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchaselist
+    where purchaseId = #{purchaseid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from purchaselist
+    where purchaseId = #{purchaseid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.test.entity.PurchaseList">
+    insert into purchaselist (purchaseId, storeMangerId, constractId, 
+      contractItemId, inTime, goodsInPrice, 
+      allCost)
+    values (#{purchaseid,jdbcType=VARCHAR}, #{storemangerid,jdbcType=VARCHAR}, #{constractid,jdbcType=VARCHAR}, 
+      #{contractitemid,jdbcType=VARCHAR}, #{intime,jdbcType=DATE}, #{goodsinprice,jdbcType=DOUBLE}, 
+      #{allcost,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.entity.PurchaseList">
+    insert into purchaselist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="purchaseid != null">
+        purchaseId,
+      </if>
+      <if test="storemangerid != null">
+        storeMangerId,
+      </if>
+      <if test="constractid != null">
+        constractId,
+      </if>
+      <if test="contractitemid != null">
+        contractItemId,
+      </if>
+      <if test="intime != null">
+        inTime,
+      </if>
+      <if test="goodsinprice != null">
+        goodsInPrice,
+      </if>
+      <if test="allcost != null">
+        allCost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="purchaseid != null">
+        #{purchaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="storemangerid != null">
+        #{storemangerid,jdbcType=VARCHAR},
+      </if>
+      <if test="constractid != null">
+        #{constractid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractitemid != null">
+        #{contractitemid,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null">
+        #{intime,jdbcType=DATE},
+      </if>
+      <if test="goodsinprice != null">
+        #{goodsinprice,jdbcType=DOUBLE},
+      </if>
+      <if test="allcost != null">
+        #{allcost,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.entity.PurchaseList">
+    update purchaselist
+    <set>
+      <if test="storemangerid != null">
+        storeMangerId = #{storemangerid,jdbcType=VARCHAR},
+      </if>
+      <if test="constractid != null">
+        constractId = #{constractid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractitemid != null">
+        contractItemId = #{contractitemid,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null">
+        inTime = #{intime,jdbcType=DATE},
+      </if>
+      <if test="goodsinprice != null">
+        goodsInPrice = #{goodsinprice,jdbcType=DOUBLE},
+      </if>
+      <if test="allcost != null">
+        allCost = #{allcost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where purchaseId = #{purchaseid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.entity.PurchaseList">
+    update purchaselist
+    set storeMangerId = #{storemangerid,jdbcType=VARCHAR},
+      constractId = #{constractid,jdbcType=VARCHAR},
+      contractItemId = #{contractitemid,jdbcType=VARCHAR},
+      inTime = #{intime,jdbcType=DATE},
+      goodsInPrice = #{goodsinprice,jdbcType=DOUBLE},
+      allCost = #{allcost,jdbcType=DOUBLE}
+    where purchaseId = #{purchaseid,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.test.entity.PurchaseList">
+    <id column="purchaseId" jdbcType="VARCHAR" property="purchaseid" />
+    <result column="storeMangerId" jdbcType="VARCHAR" property="storemangerid" />
+    <result column="constractId" jdbcType="VARCHAR" property="constractid" />
+    <result column="contractItemId" jdbcType="VARCHAR" property="contractitemid" />
+    <result column="inTime" jdbcType="DATE" property="intime" />
+    <result column="goodsInPrice" jdbcType="DOUBLE" property="goodsinprice" />
+    <result column="allCost" jdbcType="DOUBLE" property="allcost" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    purchaseId, storeMangerId, constractId, contractItemId, inTime, goodsInPrice, allCost
+  </sql>
+  <select id="selectByExample" parameterType="com.test.entity.PurchaseListExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from purchaselist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchaselist
+    where purchaseId = #{purchaseid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from purchaselist
+    where purchaseId = #{purchaseid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.test.entity.PurchaseListExample">
+    delete from purchaselist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.test.entity.PurchaseList">
+    insert into purchaselist (purchaseId, storeMangerId, constractId, 
+      contractItemId, inTime, goodsInPrice, 
+      allCost)
+    values (#{purchaseid,jdbcType=VARCHAR}, #{storemangerid,jdbcType=VARCHAR}, #{constractid,jdbcType=VARCHAR}, 
+      #{contractitemid,jdbcType=VARCHAR}, #{intime,jdbcType=DATE}, #{goodsinprice,jdbcType=DOUBLE}, 
+      #{allcost,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.entity.PurchaseList">
+    insert into purchaselist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="purchaseid != null">
+        purchaseId,
+      </if>
+      <if test="storemangerid != null">
+        storeMangerId,
+      </if>
+      <if test="constractid != null">
+        constractId,
+      </if>
+      <if test="contractitemid != null">
+        contractItemId,
+      </if>
+      <if test="intime != null">
+        inTime,
+      </if>
+      <if test="goodsinprice != null">
+        goodsInPrice,
+      </if>
+      <if test="allcost != null">
+        allCost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="purchaseid != null">
+        #{purchaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="storemangerid != null">
+        #{storemangerid,jdbcType=VARCHAR},
+      </if>
+      <if test="constractid != null">
+        #{constractid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractitemid != null">
+        #{contractitemid,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null">
+        #{intime,jdbcType=DATE},
+      </if>
+      <if test="goodsinprice != null">
+        #{goodsinprice,jdbcType=DOUBLE},
+      </if>
+      <if test="allcost != null">
+        #{allcost,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.test.entity.PurchaseListExample" resultType="java.lang.Long">
+    select count(*) from purchaselist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update purchaselist
+    <set>
+      <if test="record.purchaseid != null">
+        purchaseId = #{record.purchaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storemangerid != null">
+        storeMangerId = #{record.storemangerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constractid != null">
+        constractId = #{record.constractid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractitemid != null">
+        contractItemId = #{record.contractitemid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intime != null">
+        inTime = #{record.intime,jdbcType=DATE},
+      </if>
+      <if test="record.goodsinprice != null">
+        goodsInPrice = #{record.goodsinprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.allcost != null">
+        allCost = #{record.allcost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update purchaselist
+    set purchaseId = #{record.purchaseid,jdbcType=VARCHAR},
+      storeMangerId = #{record.storemangerid,jdbcType=VARCHAR},
+      constractId = #{record.constractid,jdbcType=VARCHAR},
+      contractItemId = #{record.contractitemid,jdbcType=VARCHAR},
+      inTime = #{record.intime,jdbcType=DATE},
+      goodsInPrice = #{record.goodsinprice,jdbcType=DOUBLE},
+      allCost = #{record.allcost,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.entity.PurchaseList">
+    update purchaselist
+    <set>
+      <if test="storemangerid != null">
+        storeMangerId = #{storemangerid,jdbcType=VARCHAR},
+      </if>
+      <if test="constractid != null">
+        constractId = #{constractid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractitemid != null">
+        contractItemId = #{contractitemid,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null">
+        inTime = #{intime,jdbcType=DATE},
+      </if>
+      <if test="goodsinprice != null">
+        goodsInPrice = #{goodsinprice,jdbcType=DOUBLE},
+      </if>
+      <if test="allcost != null">
+        allCost = #{allcost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where purchaseId = #{purchaseid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.entity.PurchaseList">
+    update purchaselist
+    set storeMangerId = #{storemangerid,jdbcType=VARCHAR},
+      constractId = #{constractid,jdbcType=VARCHAR},
+      contractItemId = #{contractitemid,jdbcType=VARCHAR},
+      inTime = #{intime,jdbcType=DATE},
+      goodsInPrice = #{goodsinprice,jdbcType=DOUBLE},
+      allCost = #{allcost,jdbcType=DOUBLE}
+    where purchaseId = #{purchaseid,jdbcType=VARCHAR}
+  </update>
+</mapper>
