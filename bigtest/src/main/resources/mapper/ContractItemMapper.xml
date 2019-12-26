@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bigtest.dao.ContractItemMapper">
+
+  <select id="selectByPrimaryKey" parameterType="com.example.bigtest.entity.ContractItemKey" resultType="com.example.bigtest.entity.ContractItem">
+    select 
+     contractId, contractItemId, goodsId, goodsName, clientId, goodsNum, goodsOutPrice, 
+    itemStatus,needGoodsNum
+    from contractitem
+    where contractId = #{contractid}
+      and contractItemId = #{contractitemid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.example.bigtest.entity.ContractItemKey">
+    delete from contractitem
+    where contractId = #{contractid}
+      and contractItemId = #{contractitemid}
+  </delete>
+  <delete id="deletwByContractId" parameterType="java.lang.Integer">
+    delete from contractitem
+    where contractId = #{contractid}
+
+  </delete>
+  <insert id="insert" parameterType="com.example.bigtest.entity.ContractItem">
+    insert into contractitem (contractId, contractItemId, goodsId, 
+      goodsName, clientId, goodsNum, 
+      goodsOutPrice, itemStatus,needGoodsNum)
+    values (#{contractid}, #{contractitemid}, #{goodsid}, 
+      #{goodsname}, #{clientid}, #{goodsnum}, 
+      #{goodsoutprice}, #{itemstatus},#{needgoodsnum})
+  </insert>
+
+  <select id="select" resultType="com.example.bigtest.entity.ContractItem">
+     select  * from contractitem
+  </select>
+  <select id="selectByContractId" parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.ContractItem">
+     select  * from contractitem  where contractId = #{contractid}
+  </select>
+  <select id="selectByClientId" parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.ContractItem">
+     select  * from contractitem  where clientId = #{clientid}
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.example.bigtest.entity.ContractItem">
+    update contractitem
+    set goodsId = #{goodsid},
+      goodsName = #{goodsname},
+      clientId = #{clientid},
+      goodsNum = #{goodsnum},
+      itemStatus = #{itemstatus},
+      needGoodsNum=#{needgoodsnum}
+    where contractId = #{contractid}
+      and contractItemId = #{contractitemid}
+  </update>
+
+  <update id="updateByOrder" parameterType="com.example.bigtest.pojo.vto.GetDispatchOrder">
+     update contractitem
+    set goodsId = #{goodsid},
+      goodsName = #{goodsname},
+      clientId = #{clientid},
+      goodsNum = #{goodsnum},
+      itemStatus = #{itemstatus},
+      needGoodsNum =#{needgoodsnum}
+    where contractId = #{contractid}
+      and contractItemId = #{contractitemid}
+  </update>
+  <update id="updateByPurchase" parameterType="com.example.bigtest.pojo.vto.GetPurchaseList">
+     update contractitem
+    set goodsId = #{goodsid},
+      goodsName = #{goodsname},
+      clientId = #{clientid},
+      goodsNum = #{goodsnum},
+      itemStatus = #{itemstatus},
+       needGoodsNum =#{needgoodsnum}
+    where contractId = #{contractid}
+      and contractItemId = #{contractitemid}
+  </update>
+
+
+  <update id="updateStatus" parameterType="com.example.bigtest.pojo.vto.ChangeItemStatus">
+     update contractitem
+    set
+      itemStatus = #{itemstatus}
+    where contractId = #{contractid}
+      and contractItemId = #{contractitemid}
+  </update>
+</mapper>

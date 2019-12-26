@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bigtest.dao.ContractInformMapper">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.ContractInform">
+    select 
+    contractId, clientId, clientName, salerId, contractName, contractCreateTime,
+    contractStartTime, contractEndTime, constractStatus, contractRemark
+    from contractinform
+    where contractId = #{contractid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contractinform
+    where contractId = #{contractid}
+  </delete>
+  <insert id="insert" parameterType="com.example.bigtest.entity.ContractInform">
+    insert into contractinform (contractId, clientId, clientName,
+      salerId, contractName, contractCreateTime, 
+      contractStartTime, contractEndTime, constractStatus, 
+      contractRemark)
+    values (#{contractid}, #{clientid}, #{clientname},
+      #{salerid}, #{contractname}, #{contractcreatetime}, 
+      #{contractstarttime}, #{contractendtime}, #{constractstatus}, 
+      #{contractremark})
+  </insert>
+  <select id="selectByClientId"  parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.ContractInform">
+     select  * from contractinform
+     where clientId = #{clientid}
+  </select>
+  <select id="selectBySalerId"  parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.ContractInform">
+     select  * from contractinform
+     where salerId = #{salerid}
+  </select>
+  <select id="select" resultType="com.example.bigtest.entity.ContractInform">
+     select  * from contractinform
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.example.bigtest.entity.ContractInform">
+    update contractinform
+    set clientId = #{clientid},
+      clientName = #{clientname},
+      salerId = #{salerid},
+      contractName = #{contractname},
+      contractCreateTime = #{contractcreatetime},
+      contractStartTime = #{contractstarttime},
+      contractEndTime = #{contractendtime},
+      constractStatus = #{constractstatus},
+      contractRemark = #{contractremark}
+    where contractId = #{contractid}
+  </update>
+  <update id="updateStatus" parameterType="com.example.bigtest.pojo.vto.GetDispatchOrder">
+    update contractinform
+    set
+      constractStatus = #{constractstatus}
+    where contractId = #{contractid}
+  </update>
+  <update id="updateStatus2" parameterType="com.example.bigtest.pojo.vto.ChangeItemStatus">
+     update contractinform
+    set
+       contractEndTime = #{contractendtime},
+       constractStatus=#{constractstatus}
+    where contractId = #{contractid}
+      and contractId = #{contractid}
+  </update>
+
+</mapper>

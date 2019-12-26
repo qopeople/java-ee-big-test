@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bigtest.dao.SalerManagerMapper">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.SalerManager">
+    select 
+     saleManagerId, userName,passWord, saleManagerName, salerManagerTel
+    from salermanager
+    where saleManagerId = #{salemanagerid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salermanager
+    where saleManagerId = #{salemanagerid}
+  </delete>
+
+
+  <select id="selectByuserName" parameterType="java.lang.String" resultType="com.example.bigtest.entity.SalerManager">
+    select
+     saleManagerId, userName,passWord, saleManagerName, salerManagerTel
+    from salermanager
+    where userName = #{username}
+  </select>
+  <insert id="insert" parameterType="com.example.bigtest.entity.SalerManager">
+    insert into salermanager (saleManagerId, userName,passWord,
+      saleManagerName, salerManagerTel)
+    values (#{salemanagerid}, #{username},#{password},
+      #{salemanagername}, #{salermanagertel})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.example.bigtest.entity.SalerManager">
+    update salermanager
+    set passWord = #{password},
+     userName = #{username},
+      saleManagerName = #{salemanagername},
+      salerManagerTel = #{salermanagertel}
+    where saleManagerId = #{salemanagerid}
+  </update>
+
+
+
+</mapper>

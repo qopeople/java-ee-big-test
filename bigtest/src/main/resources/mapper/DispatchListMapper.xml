@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bigtest.dao.DispatchListMapper">
+
+  <select id="selectByContractKey" parameterType="com.example.bigtest.entity.ContractItemKey" resultType="com.example.bigtest.entity.DispatchList">
+       select
+   dispatchListId, contractId, contractItemId,
+    startTime, endTime,realGoodsNum
+    from dispatchlist
+    where contractId = #{contractid}
+      and contractItemId = #{contractitemid}
+  </select>
+    <select id="selectByContractKeyTwo" parameterType="com.example.bigtest.entity.ContractItemKey" resultType="com.example.bigtest.entity.DispatchList">
+       select
+   dispatchListId, contractId, contractItemId,
+    startTime, endTime,realGoodsNum
+    from dispatchlist
+    where contractId = #{contractid}
+      and contractItemId = #{contractitemid}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.DispatchList">
+    select 
+   dispatchListId, contractId, contractItemId,
+    startTime, endTime,realGoodsNum
+    from dispatchlist
+    where dispatchListId = #{dispatchlistid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dispatchlist
+    where dispatchListId = #{dispatchlistid}
+  </delete>
+  <insert id="insert" parameterType="com.example.bigtest.entity.DispatchList">
+    insert into dispatchlist (dispatchListId, contractId, contractItemId,
+      startTime, endTime,realGoodsNum)
+    values (#{dispatchlistid}, #{contractid}, #{contractitemid},
+      #{starttime}, #{endtime},#{realgoodsnum})
+  </insert>
+  <insert id="insertByOther" parameterType="com.example.bigtest.pojo.vto.GetDispatchOrder">
+    insert into dispatchlist (dispatchListId, contractId, contractItemId,
+     startTime, endTime,realGoodsNum)
+    values (#{dispatchlistid}, #{contractid}, #{contractitemid},
+      #{starttime}, #{endtime},#{realgoodsnum})
+  </insert>
+
+  <select id="select" resultType="com.example.bigtest.entity.DispatchList">
+     select  * from dispatchlist
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.example.bigtest.entity.DispatchList">
+    update dispatchlist
+    set contractId = #{contractid},
+      contractItemId = #{contractitemid},
+      startTime = #{starttime},
+      endTime = #{endtime},
+      realGoodsNum=#{realgoodsnum}
+    where dispatchListId = #{dispatchlistid}
+  </update>
+  
+</mapper>

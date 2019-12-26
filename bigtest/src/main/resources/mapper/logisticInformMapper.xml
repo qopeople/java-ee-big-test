@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bigtest.dao.logisticInformMapper">
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from logisticinform
+    where dispatchlistid = #{dispatchlistid}
+      and
+  </delete>
+  <insert id="insert" parameterType="com.example.bigtest.entity.logisticInformKey">
+    insert into logisticinform (dispatchlistid, currentPostion,stepTime)
+    values (#{dispatchlistid}, #{currentpostion},#{steptime})
+  </insert>
+ <!--<select id="selectByKey" parameterType="com.example.bigtest.entity.logisticInformKey" resultType="com.example.bigtest.entity.logisticInformKey">-->
+   <!--select * from  logisticinform where-->
+     <!--dispatchlistid = #{dispatchlistid}-->
+      <!--and currentPostion = #{currentpostion}-->
+ <!--</select>-->
+  <select id="selectById" parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.logisticInformKey">
+      select * from  logisticinform where
+     dispatchlistid = #{dispatchlistid}
+  </select>
+
+
+</mapper>

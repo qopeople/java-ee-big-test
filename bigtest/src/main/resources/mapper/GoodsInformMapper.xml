@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bigtest.dao.GoodsInformMapper">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.GoodsInform">
+    select 
+    goodsId, goodsStoreNum, goodsName,goodsInPrice,goodsOutPrice
+    from goodsinform
+    where goodsId = #{goodsid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goodsinform
+    where goodsId = #{goodsid}
+  </delete>
+  <insert id="insert" parameterType="com.example.bigtest.entity.GoodsInform">
+    insert into goodsinform (goodsId, goodsStoreNum, goodsName,goodsInPrice,goodsOutPrice
+      )
+    values (#{goodsid}, #{goodsstorenum}, #{goodsname},#{goodsinprice},#{goodsoutprice}
+      )
+  </insert>
+
+  <select id="select" resultType="com.example.bigtest.entity.GoodsInform">
+     select  * from goodsinform
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.example.bigtest.entity.GoodsInform">
+    update goodsinform
+    set goodsStoreNum = #{goodsstorenum},
+      goodsName = #{goodsname},
+      goodsOutPrice =#{goodsoutprice},
+      goodsInPrice=#{goodsinprice}
+    where goodsId = #{goodsid}
+  </update>
+
+  <update id="updateByOrder" parameterType="com.example.bigtest.pojo.vto.GetDispatchOrder">
+      update goodsinform
+    set goodsStoreNum = #{goodsstorenum},
+      goodsName = #{goodsname}
+    where goodsId = #{goodsid}
+  </update>
+  <update id="updateByPurchse" parameterType="com.example.bigtest.pojo.vto.GetPurchaseList">
+      update goodsinform
+    set goodsStoreNum = #{goodsstorenum},
+      goodsName = #{goodsname}
+    where goodsId = #{goodsid}
+  </update>
+  
+</mapper>

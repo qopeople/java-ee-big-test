@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bigtest.dao.SalePersonMapper">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.bigtest.entity.SalePerson">
+    select 
+     salerId, userName,passWord, salerName, salerTel, reportDutyTime
+    from saleperson
+    where salerId = #{salerid}
+  </select>
+
+  <select id="selectByuserName" parameterType="java.lang.String" resultType="com.example.bigtest.entity.SalePerson">
+    select
+     salerId, userName,passWord, salerName, salerTel, reportDutyTime
+    from saleperson
+    where userName = #{username}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from saleperson
+    where salerId = #{salerid}
+  </delete>
+  <insert id="insert" parameterType="com.example.bigtest.entity.SalePerson">
+    insert into saleperson (salerId, userName,passWord, salerName,salerTel, reportDutyTime)
+    values (#{salerid}, #{username},#{password}, #{salername},
+      #{salertel}, #{reportdutytime})
+  </insert>
+
+  <select id="select" resultType="com.example.bigtest.entity.SalePerson">
+     select  * from saleperson
+  </select>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.example.bigtest.entity.SalePerson">
+    update saleperson
+    set passWord = #{password},
+      userName=#{username},
+      salerName = #{salername},
+      salerTel = #{salertel},
+      reportDutyTime = #{reportdutytime}
+    where salerId = #{salerid}
+  </update>
+
+  <update id="updateByUserInform" parameterType="com.example.bigtest.pojo.dto.UserAuthDTO">
+    update saleperson
+    set passWord = #{password},
+      userName=#{username}
+    where passWord = #{password} and
+      userName=#{username},
+  </update>
+</mapper>
